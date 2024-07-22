@@ -1,6 +1,7 @@
 import React from "react";
 import {
   ImageBackground,
+  Pressable,
   StyleSheet,
   Text,
   TextInput,
@@ -21,6 +22,14 @@ const LoginScreen = () => {
           placeholderTextColor="#999"
         />
         <TextInput style={styles.input} placeholder="password" />
+        <View style={styles.buttonContainer}>
+          <Pressable style={[styles.button, { backgroundColor: "lightblue" }]}>
+            <Text style={styles.buttonText}>LOGIN</Text>
+          </Pressable>
+          <Pressable style={[styles.button, { backgroundColor: "pink" }]}>
+            <Text style={styles.buttonText}>CREATE AN ACCOUNT</Text>
+          </Pressable>
+        </View>
       </View>
     </ImageBackground>
   );
@@ -36,7 +45,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  container: {},
+  container: {
+    gap: 5,
+  },
   text: {
     fontSize: 50,
   },
@@ -49,5 +60,26 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: "white",
     color: "red",
+  },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    height: "30%",
+    gap: 10,
+    paddingTop: 20,
+  },
+  button: {
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 10,
+    padding: 20,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: "400",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

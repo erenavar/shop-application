@@ -24,10 +24,14 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
         <Text style={styles.text}>Login</Text>
         <TextInput
           style={styles.input}
-          placeholder="email"
+          placeholder="E-mail"
           placeholderTextColor="#999"
         />
-        <TextInput style={styles.input} placeholder="password" />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#999"
+        />
         <View style={styles.buttonContainer}>
           <Pressable style={[styles.button, { backgroundColor: "lightblue" }]}>
             <Text style={styles.buttonText}>LOGIN</Text>
@@ -71,7 +75,6 @@ const styles = StyleSheet.create({
     width: 300,
     marginVertical: 10,
     backgroundColor: "white",
-    color: "red",
   },
   buttonContainer: {
     display: "flex",

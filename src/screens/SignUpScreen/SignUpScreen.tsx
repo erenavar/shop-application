@@ -11,6 +11,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { ISignup } from "./types";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Signup">;
 
@@ -22,8 +23,7 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
     confirmPassword: "",
   });
 
-  const auth = getAuth();
-  const signup = () => {
+  const signup = async () => {
     if (state.password === state.confirmPassword) {
       createUserWithEmailAndPassword(auth, state.email, state.password)
         .then((userCredential) => {

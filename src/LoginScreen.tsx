@@ -27,7 +27,10 @@ const LoginScreen = () => {
             <Text style={styles.buttonText}>LOGIN</Text>
           </Pressable>
           <Pressable style={[styles.button, { backgroundColor: "pink" }]}>
-            <Text style={styles.buttonText}>CREATE AN ACCOUNT</Text>
+            <View style={{ alignItems: "center" }}>
+              <Text style={styles.buttonText}>CREATE AN</Text>
+              <Text style={styles.buttonText}>ACCOUNT</Text>
+            </View>
           </Pressable>
         </View>
       </View>

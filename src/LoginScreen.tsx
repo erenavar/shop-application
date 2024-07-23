@@ -1,4 +1,5 @@
-import React from "react";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import React, { FC } from "react";
 import {
   ImageBackground,
   Pressable,
@@ -8,7 +9,9 @@ import {
   View,
 } from "react-native";
 
-const LoginScreen = () => {
+type Props = NativeStackScreenProps<RootStackParamList, "Login">;
+
+const LoginScreen: FC<Props> = () => {
   return (
     <ImageBackground
       style={styles.background}

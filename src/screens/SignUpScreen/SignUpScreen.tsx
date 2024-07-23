@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { ISignup } from "./types";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Signup">;
 
@@ -21,7 +22,23 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
     confirmPassword: "",
   });
 
-  console.log("signup.email :>> ", state);
+  const auth = getAuth();
+  const signup = () => {
+    if (state.password === state.confirmPassword) {
+      createUserWithEmailAndPassword(auth, state.email, state.password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          navigation.navigate("Home");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    } else {
+      alert("Confirm Your Password");
+    }
+  };
 
   return (
     <ImageBackground
@@ -59,7 +76,10 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
             setState((prevState) => ({ ...prevState, confirmPassword: text }))
           }
         />
-        <Pressable style={[styles.button, { backgroundColor: "lightblue" }]}>
+        <Pressable
+          style={[styles.button, { backgroundColor: "lightblue" }]}
+          onPress={signup}
+        >
           <Text style={styles.buttonText}>Signup</Text>
         </Pressable>
         <Pressable style={styles.back} onPress={back}>

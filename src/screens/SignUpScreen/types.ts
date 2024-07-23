@@ -1,5 +1,5 @@
 export interface ISignup {
-    email:string | null,
-    password:string | null,
-    confirmPassword: string | null
+    email:string ,
+    password:string ,
+    confirmPassword: string 
 }

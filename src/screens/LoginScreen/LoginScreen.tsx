@@ -13,7 +13,7 @@ import { ILogin } from "./types";
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
 const LoginScreen: FC<Props> = ({ navigation }) => {
-  const [login, setLogin] = useState<ILogin>({
+  const [state, setState] = useState<ILogin>({
     email: "",
     password: "",
   });
@@ -21,6 +21,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
   const toSignup = () => {
     navigation.navigate("Signup");
   };
+  console.log("state :>> ", state);
   return (
     <ImageBackground
       style={styles.background}
@@ -29,14 +30,22 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={styles.text}>Login</Text>
         <TextInput
+          autoCapitalize="none"
           style={styles.input}
           placeholder="E-mail"
           placeholderTextColor="#999"
+          onChangeText={(text) =>
+            setState((prevState) => ({ ...prevState, email: text }))
+          }
         />
         <TextInput
+          autoCapitalize="none"
           style={styles.input}
           placeholder="Password"
           placeholderTextColor="#999"
+          onChangeText={(text) =>
+            setState((prevState) => ({ ...prevState, password: text }))
+          }
         />
         <View style={styles.buttonContainer}>
           <Pressable style={[styles.button, { backgroundColor: "lightblue" }]}>

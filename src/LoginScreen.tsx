@@ -11,7 +11,10 @@ import {
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
-const LoginScreen: FC<Props> = () => {
+const LoginScreen: FC<Props> = ({ navigation }) => {
+  const toSignup = () => {
+    navigation.navigate("Signup");
+  };
   return (
     <ImageBackground
       style={styles.background}
@@ -29,7 +32,10 @@ const LoginScreen: FC<Props> = () => {
           <Pressable style={[styles.button, { backgroundColor: "lightblue" }]}>
             <Text style={styles.buttonText}>LOGIN</Text>
           </Pressable>
-          <Pressable style={[styles.button, { backgroundColor: "pink" }]}>
+          <Pressable
+            style={[styles.button, { backgroundColor: "pink" }]}
+            onPress={toSignup}
+          >
             <View style={{ alignItems: "center" }}>
               <Text style={styles.buttonText}>CREATE AN</Text>
               <Text style={styles.buttonText}>ACCOUNT</Text>

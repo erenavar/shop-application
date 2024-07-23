@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   ImageBackground,
   Pressable,
@@ -8,17 +8,23 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { ILogin } from "./types";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
 const LoginScreen: FC<Props> = ({ navigation }) => {
+  const [login, setLogin] = useState<ILogin>({
+    email: "",
+    password: "",
+  });
+
   const toSignup = () => {
     navigation.navigate("Signup");
   };
   return (
     <ImageBackground
       style={styles.background}
-      source={require("../assets/background.jpg")}
+      source={require("../../../assets/background.jpg")}
     >
       <View style={styles.container}>
         <Text style={styles.text}>Login</Text>

@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   ImageBackground,
   Pressable,
@@ -9,32 +9,54 @@ import {
   View,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { ISignup } from "./types";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Signup">;
 
 const SignUpScreen: FC<Props> = ({ navigation }) => {
   const back = () => navigation.goBack();
+  const [signup, setSignup] = useState<ISignup>({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  console.log("signup.email :>> ", signup);
+
   return (
     <ImageBackground
       style={styles.background}
-      source={require("../assets/background.jpg")}
+      source={require("../../../assets/background.jpg")}
     >
       <View style={styles.container}>
         <Text style={styles.text}>Login</Text>
         <TextInput
+          keyboardType="email-address"
+          autoCapitalize="none"
           style={styles.input}
           placeholder="E-mail"
           placeholderTextColor="#999"
+          onChangeText={(text) =>
+            setSignup((prevState) => ({ ...prevState, email: text }))
+          }
         />
         <TextInput
+          secureTextEntry
           style={styles.input}
           placeholder="Password"
           placeholderTextColor="#999"
+          onChangeText={(text) =>
+            setSignup((prevState) => ({ ...prevState, password: text }))
+          }
         />
         <TextInput
+          secureTextEntry
           style={styles.input}
           placeholder="Confirm Password"
           placeholderTextColor="#999"
+          onChangeText={(text) =>
+            setSignup((prevState) => ({ ...prevState, confirmPassword: text }))
+          }
         />
         <Pressable style={[styles.button, { backgroundColor: "lightblue" }]}>
           <Text style={styles.buttonText}>Signup</Text>

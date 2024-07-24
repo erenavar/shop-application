@@ -2,7 +2,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import LoginScreen from "../screens/LoginScreen/LoginScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUpScreen from "../screens/SignUpScreen/SignUpScreen";
-import HomeScreen from "../screens/Home/HomeScreen";
+import { RootStackParamList } from "./types";
+import { TabNavigation } from "./TabNavigation";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -21,8 +22,8 @@ function MainNavigation() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
+          name="TabNavigation"
+          component={TabNavigation}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

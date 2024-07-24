@@ -10,8 +10,9 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { ISignup } from "./types";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
+import { RootStackParamList } from "../../Navigation/types";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Signup">;
 
@@ -28,7 +29,7 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
       createUserWithEmailAndPassword(auth, state.email, state.password)
         .then((userCredential) => {
           const user = userCredential.user;
-          navigation.navigate("Home");
+          navigation.navigate("TabNavigation");
         })
         .catch((error) => {
           const errorCode = error.code;

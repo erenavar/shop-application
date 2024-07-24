@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import { ILogin } from "./types";
+import { RootStackParamList } from "../../Navigation/types";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
@@ -17,6 +18,10 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
     email: "",
     password: "",
   });
+
+  const login = () => {
+    navigation.navigate("TabNavigation");
+  };
 
   const toSignup = () => {
     navigation.navigate("Signup");

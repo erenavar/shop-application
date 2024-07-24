@@ -53,7 +53,10 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
           }
         />
         <View style={styles.buttonContainer}>
-          <Pressable style={[styles.button, { backgroundColor: "lightblue" }]}>
+          <Pressable
+            style={[styles.button, { backgroundColor: "lightblue" }]}
+            onPress={login}
+          >
             <Text style={styles.buttonText}>LOGIN</Text>
           </Pressable>
           <Pressable

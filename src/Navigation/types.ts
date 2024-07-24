@@ -8,5 +8,8 @@ export type RootStackParamList = {
   };
 
   export type TabParamList = {
-    Home: undefined
+    Home: undefined,
+    Cart:undefined,
+    Favourites: undefined,
+    Profile: undefined
   }

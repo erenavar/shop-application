@@ -4,16 +4,49 @@ import { TabParamList } from "./types";
 import ProfileScreen from "../screens/Profile/ProfileScreen";
 import FavouritesScreen from "../screens/Favourites/FavouritesScreen";
 import CartScreen from "../screens/Cart/CartScreen";
+import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export function TabNavigation() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="Favourites" component={FavouritesScreen} />
-      <Tab.Screen name="Cart" component={CartScreen} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: () => (
+            <Ionicons name="home-outline" size={27} color="black" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: () => (
+            <Ionicons name="person-outline" size={27} color="black" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Favourites"
+        component={FavouritesScreen}
+        options={{
+          tabBarIcon: () => (
+            <Ionicons name="star-outline" size={27} color="black" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          tabBarIcon: () => (
+            <Ionicons name="cart-outline" size={27} color="black" />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }

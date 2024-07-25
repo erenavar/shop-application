@@ -4,7 +4,7 @@ import { CompositeScreenProps } from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { RootStackParamList, TabParamList } from "../../Navigation/types";
 import { StackScreenProps } from "@react-navigation/stack";
-import { LinearGradient } from "expo-linear-gradient";
+import { ThemedButton } from "react-native-really-awesome-button";
 import GradientText from "../../components/GradientText";
 
 type Props = CompositeScreenProps<
@@ -16,6 +16,9 @@ export const HomeScreen: FC<Props> = () => {
   return (
     <View>
       <GradientText text="Categories" style={styles.gradientText} />
+      <ThemedButton name="rick" type="primary">
+        Primary
+      </ThemedButton>
     </View>
   );
 };

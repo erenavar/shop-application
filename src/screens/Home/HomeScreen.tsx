@@ -4,6 +4,8 @@ import { CompositeScreenProps } from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { RootStackParamList, TabParamList } from "../../Navigation/types";
 import { StackScreenProps } from "@react-navigation/stack";
+import { LinearGradient } from "expo-linear-gradient";
+import GradientText from "../../components/GradientText";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<TabParamList, "Home">,
@@ -13,9 +15,14 @@ type Props = CompositeScreenProps<
 export const HomeScreen: FC<Props> = () => {
   return (
     <View>
-      <Text>HomeScreen</Text>
+      <GradientText text="Categories" style={styles.gradientText} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  gradientText: {
+    fontSize: 40,
+    alignSelf: "center",
+  },
+});

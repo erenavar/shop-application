@@ -15,9 +15,9 @@ type Props = CompositeScreenProps<
 
 export const HomeScreen: FC<Props> = () => {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <GradientText text="Categories" style={styles.gradientText} />
-      <View>
+      <View style={styles.buttonContainer}>
         <CustomButton title="Men's Clothing" type="facebook" />
         <CustomButton title="Jewelery" type="secondary" />
         <CustomButton title="Electronic" type="primary" />
@@ -32,7 +32,9 @@ const styles = StyleSheet.create({
     fontSize: 40,
     alignSelf: "center",
   },
-  button: {
-    backgroundColor: "purple",
+  buttonContainer: {
+    flex: 1,
+    flexWrap: "wrap",
+    flexDirection: "row",
   },
 });

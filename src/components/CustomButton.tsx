@@ -1,3 +1,4 @@
+import { StyleSheet, View } from "react-native";
 import { ThemedButton } from "react-native-really-awesome-button";
 
 interface IProps {
@@ -7,10 +8,20 @@ interface IProps {
 
 const CustomButton = (props: IProps) => {
   return (
-    <ThemedButton name="rick" type={props.type}>
-      {props.title}
-    </ThemedButton>
+    <View style={styles.buttons}>
+      <ThemedButton name="rick" type={props.type} width={150}>
+        {props.title}
+      </ThemedButton>
+    </View>
   );
 };
 
 export default CustomButton;
+
+const styles = StyleSheet.create({
+  buttons: {
+    flexBasis: "50%",
+    alignItems: "center",
+    marginTop: "5%",
+  },
+});

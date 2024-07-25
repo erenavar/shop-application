@@ -7,6 +7,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import GradientText from "../../components/GradientText";
 import CustomButton from "../../components/CustomButton";
 import { useQuery } from "@tanstack/react-query";
+import Indicator from "../../components/Indicator";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<TabParamList, "Home">,
@@ -20,8 +21,7 @@ export const HomeScreen: FC<Props> = () => {
       fetch("https://fakestoreapi.com/products").then((res) => res.json()),
   });
 
-  console.log("data :>> ", data);
-
+  if (isLoading) return <Indicator />;
   return (
     <View style={{ flex: 1 }}>
       <GradientText text="Categories" style={styles.gradientText} />

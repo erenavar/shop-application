@@ -18,6 +18,7 @@ export function TabNavigation() {
           tabBarIcon: () => (
             <Ionicons name="home-outline" size={27} color="black" />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen

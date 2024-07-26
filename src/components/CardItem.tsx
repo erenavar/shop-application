@@ -1,7 +1,11 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const CardItem = () => {
+interface IProps {
+  title: string;
+}
+
+const CardItem = (props: IProps) => {
   return (
     <View style={styles.container}>
       <Image
@@ -9,7 +13,8 @@ const CardItem = () => {
         style={styles.image}
       />
       <View style={styles.summary}>
-        <Text>dfd</Text>
+        <Text style={styles.title}>{props.title}</Text>
+        <Text></Text>
       </View>
     </View>
   );
@@ -19,10 +24,17 @@ export default CardItem;
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
+    flexDirection: "row",
   },
   image: {
-    height: 100,
+    width: 150,
+    height: 150,
   },
-  summary: {},
+  summary: {
+    marginLeft: "5%",
+  },
+  title: {
+    flex: 1,
+    width: 200,
+  },
 });

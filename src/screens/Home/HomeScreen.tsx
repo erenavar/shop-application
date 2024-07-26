@@ -21,7 +21,7 @@ export const HomeScreen: FC<Props> = () => {
     queryFn: () =>
       fetch("https://fakestoreapi.com/products").then((res) => res.json()),
   });
-
+  console.log("data :>> ", data);
   if (isLoading) return <Indicator />;
   return (
     <SafeAreaView style={styles.container}>
@@ -37,8 +37,8 @@ export const HomeScreen: FC<Props> = () => {
           <CustomButton title="Women's Clothing" type="anchor" />
         </View>
       </View>
-      <View>
-        <CardItem />
+      <View style={styles.productContainer}>
+        <CardItem title={data[0].title} />
       </View>
     </SafeAreaView>
   );
@@ -56,5 +56,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginVertical: "10%",
+  },
+  productContainer: {
+    gap: 15,
   },
 });

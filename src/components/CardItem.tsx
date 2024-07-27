@@ -30,7 +30,10 @@ const CardItem = (props: IProps) => {
             <FontAwesome name="commenting-o" size={18} color="black" />
             <Text>{props.rating.count}</Text>
           </View>
-          <Text>{props.rating.rate}/5</Text>
+          <View style={styles.rate}>
+            <FontAwesome name="thumbs-o-up" size={16} color="black" />
+            <Text>{props.rating.rate}/5</Text>
+          </View>
           <Pressable>
             <FontAwesome name="heart-o" size={18} color="black" />
             {/* <FontAwesome name="heart" size={24} color="black" /> */}
@@ -66,6 +69,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   count: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 2,
+  },
+  rate: {
     flexDirection: "row",
     alignItems: "center",
     gap: 2,

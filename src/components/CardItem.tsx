@@ -1,5 +1,5 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
 
 interface IProps {
@@ -10,7 +10,6 @@ interface IProps {
     count: number;
   };
 }
-
 const CardItem = (props: IProps) => {
   return (
     <View style={styles.container}>
@@ -19,12 +18,10 @@ const CardItem = (props: IProps) => {
         style={styles.image}
       />
       <View style={styles.summary}>
-        <View>
-          <Text>{props.title}</Text>
-        </View>
-        <View>
-          <Text>${props.price}</Text>
-        </View>
+        <Text style={styles.title}>{props.title}</Text>
+
+        <Text style={styles.price}>${props.price}</Text>
+
         <View style={styles.rating}>
           <View style={styles.count}>
             <FontAwesome name="commenting-o" size={18} color="black" />
@@ -60,8 +57,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    flex: 1,
-    width: 200,
+    fontSize: 15,
+    fontStyle: "italic",
+  },
+  price: {
+    fontWeight: "600",
+    fontStyle: "italic",
   },
   rating: {
     flexDirection: "row",

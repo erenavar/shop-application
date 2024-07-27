@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React, { FC } from "react";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
@@ -38,10 +38,16 @@ export const HomeScreen: FC<Props> = () => {
         </View>
       </View>
       <View style={styles.productContainer}>
-        <CardItem
-          title={data[0].title}
-          price={data[0].price}
-          rating={data[0].rating}
+        <FlatList
+          data={data}
+          renderItem={({ item }) => (
+            <CardItem
+              title={item.title}
+              price={item.price}
+              rating={item.rating}
+            />
+          )}
+          keyExtractor={(item) => item.id}
         />
       </View>
     </SafeAreaView>

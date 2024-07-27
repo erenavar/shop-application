@@ -3,6 +3,11 @@ import React from "react";
 
 interface IProps {
   title: string;
+  price: number;
+  rating: {
+    rate: number;
+    count: number;
+  };
 }
 
 const CardItem = (props: IProps) => {
@@ -14,7 +19,11 @@ const CardItem = (props: IProps) => {
       />
       <View style={styles.summary}>
         <Text style={styles.title}>{props.title}</Text>
-        <Text></Text>
+        <Text>${props.price}</Text>
+        <View style={styles.rating}>
+          <Text>{props.rating.count}</Text>
+          <Text>{props.rating.rate}/5</Text>
+        </View>
       </View>
     </View>
   );
@@ -37,4 +46,5 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 200,
   },
+  rating: {},
 });

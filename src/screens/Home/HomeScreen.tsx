@@ -21,7 +21,7 @@ export const HomeScreen: FC<Props> = () => {
     queryFn: () =>
       fetch("https://fakestoreapi.com/products").then((res) => res.json()),
   });
-  console.log("data :>> ", data);
+
   if (isLoading) return <Indicator />;
   return (
     <SafeAreaView style={styles.container}>
@@ -38,7 +38,11 @@ export const HomeScreen: FC<Props> = () => {
         </View>
       </View>
       <View style={styles.productContainer}>
-        <CardItem title={data[0].title} />
+        <CardItem
+          title={data[0].title}
+          price={data[0].price}
+          rating={data[0].rating}
+        />
       </View>
     </SafeAreaView>
   );

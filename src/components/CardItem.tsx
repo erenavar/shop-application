@@ -46,6 +46,7 @@ export default CardItem;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    marginTop: 30,
   },
   image: {
     width: 150,
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginBottom: 5,
   },
   count: {
     flexDirection: "row",

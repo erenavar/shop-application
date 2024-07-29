@@ -39,6 +39,7 @@ export const HomeScreen: FC<Props> = () => {
       </View>
       <View style={styles.productContainer}>
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={data}
           renderItem={({ item }) => (
             <CardItem

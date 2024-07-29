@@ -25,7 +25,7 @@ function MainNavigation() {
         <Stack.Screen
           name="Details"
           component={DetailsScreen}
-          options={{ headerShown: false }}
+          options={{ headerBackTitle: "Products" }}
         />
         <Stack.Screen
           name="TabNavigation"

@@ -15,7 +15,10 @@ type Props = CompositeScreenProps<
   StackScreenProps<RootStackParamList>
 >;
 
-export const HomeScreen: FC<Props> = () => {
+export const HomeScreen: FC<Props> = ({ navigation }) => {
+  const toNavigate = (id) => {
+    navigation.navigate("Details", { id: id });
+  };
   const { isLoading, error, data } = useQuery({
     queryKey: ["products"],
     queryFn: () =>
@@ -47,6 +50,7 @@ export const HomeScreen: FC<Props> = () => {
               title={item.title}
               price={item.price}
               rating={item.rating}
+              toNavigate={() => toNavigate(item.id)}
             />
           )}
           keyExtractor={(item) => item.id}

@@ -1,10 +1,19 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { FC } from "react";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { RootStackParamList, TabParamList } from "../../Navigation/types";
+import { StackScreenProps } from "@react-navigation/stack";
 
-const DetailsScreen = () => {
+type Props = CompositeScreenProps<
+  StackScreenProps<RootStackParamList, "Details">,
+  BottomTabScreenProps<TabParamList>
+>;
+
+const DetailsScreen: FC<Props> = ({ route }) => {
   return (
     <View>
-      <Text>DetailsScreen</Text>
+      <Text>{route.params.id}</Text>
     </View>
   );
 };

@@ -1,23 +1,11 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { IProps } from "./types";
 
-interface IProps {
-  title: string;
-  price: number;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
 const CardItem = (props: IProps) => {
-  const navigation = useNavigation();
-  const toDetails = () => {
-    navigation.navigate("Details");
-  };
   return (
-    <Pressable style={styles.container} onPress={toDetails}>
+    <Pressable style={styles.container} onPress={props.toNavigate}>
       <Image
         source={require("../../assets/background.jpg")}
         style={styles.image}

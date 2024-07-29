@@ -19,5 +19,5 @@ const CustomButton = (props: IProps) => {
 export default CustomButton;
 
 const styles = StyleSheet.create({
-  buttons: {},
+  buttons: { marginTop: 15 },
 });

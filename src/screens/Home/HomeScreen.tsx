@@ -16,7 +16,7 @@ type Props = CompositeScreenProps<
 >;
 
 export const HomeScreen: FC<Props> = ({ navigation }) => {
-  const toNavigate = (id) => {
+  const toNavigate = (id: number) => {
     navigation.navigate("Details", { id: id });
   };
   const { isLoading, error, data } = useQuery({
@@ -30,7 +30,6 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <GradientText text="Categories" style={styles.gradientText} />
-
       <View style={styles.buttonContainer1}>
         <View>
           <CustomButton title="Men's Clothing" type="facebook" />
@@ -41,6 +40,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
           <CustomButton title="Women's Clothing" type="anchor" />
         </View>
       </View>
+
       <View style={styles.productContainer}>
         <FlatList
           showsVerticalScrollIndicator={false}
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   buttonContainer1: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginVertical: "10%",
+    marginVertical: "5%",
   },
   productContainer: {
     gap: 15,

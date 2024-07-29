@@ -1,6 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 interface IProps {
   title: string;
@@ -11,8 +12,12 @@ interface IProps {
   };
 }
 const CardItem = (props: IProps) => {
+  const navigation = useNavigation();
+  const toDetails = () => {
+    navigation.navigate("Details");
+  };
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={toDetails}>
       <Image
         source={require("../../assets/background.jpg")}
         style={styles.image}
@@ -37,7 +42,7 @@ const CardItem = (props: IProps) => {
           </Pressable>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

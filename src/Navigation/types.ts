@@ -4,7 +4,7 @@ export type RootStackParamList = {
     Login: undefined;
     Signup: undefined;
     TabNavigation: NavigatorScreenParams<TabParamList> | undefined
-    
+    Details: undefined
   };
 
   export type TabParamList = {

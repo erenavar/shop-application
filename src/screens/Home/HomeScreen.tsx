@@ -23,6 +23,7 @@ export const HomeScreen: FC<Props> = () => {
   });
 
   if (isLoading) return <Indicator />;
+  if (error) console.log("error :>> ", error);
   return (
     <SafeAreaView style={styles.container}>
       <GradientText text="Categories" style={styles.gradientText} />

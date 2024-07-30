@@ -50,6 +50,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
               title={item.title}
               price={item.price}
               rating={item.rating}
+              image={item.image}
               toNavigate={() => toNavigate(item.id)}
             />
           )}

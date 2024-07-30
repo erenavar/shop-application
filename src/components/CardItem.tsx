@@ -7,8 +7,9 @@ const CardItem = (props: IProps) => {
   return (
     <Pressable style={styles.container} onPress={props.toNavigate}>
       <Image
-        source={require("../../assets/background.jpg")}
+        source={{ uri: props.image }}
         style={styles.image}
+        resizeMode="contain"
       />
       <View style={styles.summary}>
         <Text style={styles.title}>{props.title}</Text>

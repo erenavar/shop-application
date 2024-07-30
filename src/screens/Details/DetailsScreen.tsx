@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { FC } from "react";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
@@ -31,13 +31,23 @@ const DetailsScreen: FC<Props> = ({ route }) => {
           <Text style={styles.count}>(120)</Text>
         </View>
       </View>
-
       <GradientText style={styles.descTitle} text="Description" />
       <Text style={styles.descText}>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores,
         molestiae! Qui odit dignissimos tenetur aspernatur, nihil sequi
         cupiditate unde aliquid, sint alias a nobis? Consequatur soluta
       </Text>
+      <View style={styles.bottom}>
+        <Pressable style={styles.heart}>
+          <FontAwesome name="heart-o" size={24} color="rebeccapurple" />
+          {/* <FontAwesome name="heart" size={24} color="black" /> */}
+        </Pressable>
+        <Pressable style={styles.button}>
+          <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
+            ADD TO CART
+          </Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -88,4 +98,26 @@ const styles = StyleSheet.create({
     marginVertical: "5%",
   },
   descText: { fontSize: 16, lineHeight: 20 },
+  bottom: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 20,
+  },
+  button: {
+    flex: 1,
+    backgroundColor: "rebeccapurple",
+    marginLeft: "6%",
+    height: "35%",
+    borderRadius: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  heart: {
+    backgroundColor: "#CBC3E3",
+    height: "35%",
+    width: "15%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 4,
+  },
 });

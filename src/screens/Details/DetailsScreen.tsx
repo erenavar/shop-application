@@ -4,6 +4,7 @@ import { CompositeScreenProps } from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { RootStackParamList, TabParamList } from "../../Navigation/types";
 import { StackScreenProps } from "@react-navigation/stack";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 type Props = CompositeScreenProps<
   StackScreenProps<RootStackParamList, "Details">,
@@ -19,12 +20,14 @@ const DetailsScreen: FC<Props> = ({ route }) => {
       />
       <View style={styles.info}>
         <View>
-          <Text>1</Text>
-          <Text>2</Text>
-          <Text>3</Text>
+          <Text style={styles.title}>Body Suit</Text>
+          <Text style={styles.category}>Mother Care</Text>
+          <Text style={styles.price}>$400</Text>
         </View>
-        <View>
-          <Text>4</Text>
+        <View style={styles.stars}>
+          <FontAwesome name="star" size={18} color="orange" />
+          <Text style={{ fontSize: 16 }}>4.9</Text>
+          <Text style={styles.count}>(120)</Text>
         </View>
       </View>
     </View>
@@ -36,15 +39,34 @@ export default DetailsScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: "2%",
+    padding: "5%",
   },
   image: {
-    height: "50%",
+    height: "47%",
     width: "100%",
     borderRadius: 5,
   },
   info: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: "3%",
+  },
+  title: { fontSize: 18, fontFamily: "Helvetica" },
+  category: {
+    fontSize: 16,
+    color: "gray",
+    marginVertical: "6%",
+    fontFamily: "Times New Roman",
+    fontWeight: "500",
+  },
+  price: { fontSize: 18, fontFamily: "sans-serif" },
+  stars: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 3,
+  },
+  count: {
+    fontSize: 16,
+    color: "gray",
   },
 });

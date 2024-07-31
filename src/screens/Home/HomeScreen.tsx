@@ -32,7 +32,11 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
       <GradientText text="Categories" style={styles.gradientText} />
       <View style={styles.buttonContainer1}>
         <View>
-          <CustomButton title="Men's Clothing" type="facebook" />
+          <CustomButton
+            title="Men's Clothing"
+            type="facebook"
+            onPress={() => alert("test")}
+          />
           <CustomButton title="Jewelery" type="secondary" />
         </View>
         <View>

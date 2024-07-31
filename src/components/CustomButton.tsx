@@ -1,7 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { Button, ButtonProps, Pressable, StyleSheet, View } from "react-native";
 import { ThemedButton } from "react-native-really-awesome-button";
 
-interface IProps {
+interface IProps extends ButtonProps {
   title: string;
   type: any;
 }

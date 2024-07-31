@@ -1,4 +1,4 @@
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
 import React, { FC } from "react";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
@@ -27,6 +27,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
 
   if (isLoading) return <Indicator />;
   if (error) console.log("error :>> ", error);
+  const categoryFilter = (category: string) => alert(category);
   return (
     <SafeAreaView style={styles.container}>
       <GradientText text="Categories" style={styles.gradientText} />
@@ -35,13 +36,25 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
           <CustomButton
             title="Men's Clothing"
             type="facebook"
-            onPress={() => alert("test")}
+            filter={() => categoryFilter("men's clothing")}
           />
-          <CustomButton title="Jewelery" type="secondary" />
+          <CustomButton
+            title="Jewelery"
+            type="secondary"
+            filter={() => categoryFilter("jewellery")}
+          />
         </View>
         <View>
-          <CustomButton title="Electronic" type="primary" />
-          <CustomButton title="Women's Clothing" type="anchor" />
+          <CustomButton
+            title="Electronic"
+            type="primary"
+            filter={() => categoryFilter("electronics")}
+          />
+          <CustomButton
+            title="Women's Clothing"
+            type="anchor"
+            filter={() => categoryFilter("women's clothing")}
+          />
         </View>
       </View>
 

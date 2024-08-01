@@ -1,11 +1,12 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { FC } from "react";
-import { CompositeScreenProps } from "@react-navigation/native";
+import { CompositeScreenProps, useRoute } from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { RootStackParamList, TabParamList } from "../../Navigation/types";
 import { StackScreenProps } from "@react-navigation/stack";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import GradientText from "../../components/GradientText";
+import { useQuery } from "@tanstack/react-query";
 
 type Props = CompositeScreenProps<
   StackScreenProps<RootStackParamList, "Details">,
@@ -13,8 +14,18 @@ type Props = CompositeScreenProps<
 >;
 
 const DetailsScreen: FC<Props> = ({ route }) => {
+  const { data, error } = useQuery({
+    queryKey: ["ProductDetails"],
+    queryFn: async () =>
+      fetch("https://fakestoreapi.com/products/" + `${route.params.id}`).then(
+        (res) => res.json()
+      ),
+  });
+  console.log("data :>> ", data);
+
   return (
     <View style={styles.container}>
+      <Text>{route.params.id}</Text>
       <Image
         style={styles.image}
         source={require("../../../assets/background.jpg")}

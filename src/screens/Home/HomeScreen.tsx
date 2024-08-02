@@ -69,7 +69,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
       <View style={styles.searchArea}>
         <TextInput style={styles.input} placeholder="Search" />
         <Pressable style={styles.searchButton}>
-          <Text>Search</Text>
+          <Text style={styles.searchText}>Search</Text>
         </Pressable>
       </View>
 
@@ -111,7 +111,22 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 15,
   },
-  searchArea: { flexDirection: "row", padding: 10 },
-  input: { width: width * 0.7 },
-  searchButton: {},
+  searchArea: { flexDirection: "row", flex: 0.09, gap: 13 },
+  input: {
+    width: width * 0.6,
+    backgroundColor: "white",
+    borderRadius: 5,
+    flex: 7,
+    paddingLeft: 10,
+  },
+  searchButton: {
+    backgroundColor: "dodgerblue",
+    borderRadius: 6,
+    flex: 3,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  searchText: {
+    color: "white",
+  },
 });

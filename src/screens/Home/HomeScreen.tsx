@@ -81,6 +81,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: "5%",
+    flex: 1,
   },
   gradientText: {
     fontSize: 40,
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
     marginVertical: "5%",
   },
   productContainer: {
+    flex: 1,
     gap: 15,
   },
 });

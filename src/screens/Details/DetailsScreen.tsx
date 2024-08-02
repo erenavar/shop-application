@@ -1,6 +1,8 @@
 import {
+  Dimensions,
   Image,
   Pressable,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -15,26 +17,31 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import GradientText from "../../components/GradientText";
 import { useQuery } from "@tanstack/react-query";
 import Indicator from "../../components/Indicator";
+import { IProduct } from "../Home/types";
 
 type Props = CompositeScreenProps<
   StackScreenProps<RootStackParamList, "Details">,
   BottomTabScreenProps<TabParamList>
 >;
-
+const width = Dimensions.get("window").width;
 const DetailsScreen: FC<Props> = ({ route }) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["ProductDetails"],
     queryFn: () =>
       fetch("https://fakestoreapi.com/products/" + `${route.params.id}`).then(
-        (res) => res.json()
+        (res) => res.json() as Promise<IProduct>
       ),
   });
   if (isLoading) return <Indicator />;
   if (error) console.log("error :>> ", error);
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
+      >
         <Image
           style={styles.image}
           source={{ uri: data?.image }}
@@ -42,18 +49,18 @@ const DetailsScreen: FC<Props> = ({ route }) => {
         />
         <View style={styles.info}>
           <View style={styles.firstColumn}>
-            <Text style={styles.title}>{data.title}</Text>
-            <Text style={styles.category}>{data.category}</Text>
-            <Text style={{ fontSize: 16 }}>${data.price}</Text>
+            <Text style={styles.title}>{data?.title}</Text>
+            <Text style={styles.category}>{data?.category}</Text>
+            <Text style={{ fontSize: 16 }}>${data?.price}</Text>
           </View>
           <View style={styles.stars}>
             <FontAwesome name="star" size={18} color="orange" />
-            <Text style={{ fontSize: 16 }}>{data.rating.rate}</Text>
-            <Text style={styles.count}>({data.rating.count})</Text>
+            <Text style={{ fontSize: 16 }}>{data?.rating.rate}</Text>
+            <Text style={styles.count}>({data?.rating.count})</Text>
           </View>
         </View>
         <GradientText style={styles.descTitle} text="Description" />
-        <Text style={{ flex: 1 }}>{data.description}</Text>
+        <Text>{data?.description}</Text>
       </ScrollView>
 
       <View style={styles.bottom}>
@@ -67,7 +74,7 @@ const DetailsScreen: FC<Props> = ({ route }) => {
           </Text>
         </Pressable>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -75,12 +82,11 @@ export default DetailsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    height: "100%",
-    padding: "5%",
+    flex: 1,
+    margin: 10,
   },
-  scroll: { paddingBottom: 60 },
-  image: { height: "100%", width: "100%", borderRadius: 5 },
+  scroll: {},
+  image: { borderRadius: 5, width: width, height: width },
   info: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -109,7 +115,6 @@ const styles = StyleSheet.create({
   count: { fontSize: 16, color: "gray" },
   descTitle: {
     fontSize: 20,
-    marginVertical: "5%",
   },
   descText: { fontSize: 16, lineHeight: 20 },
   bottom: {
@@ -121,17 +126,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rebeccapurple",
     marginLeft: "6%",
-    height: "35%",
     borderRadius: 4,
     justifyContent: "center",
     alignItems: "center",
+    padding: 15,
   },
   heart: {
     backgroundColor: "#CBC3E3",
-    height: "35%",
-    width: "15%",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 4,
+    padding: 15,
   },
 });

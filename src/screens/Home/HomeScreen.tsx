@@ -1,4 +1,13 @@
-import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  FlatList,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import React, { FC } from "react";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
@@ -14,7 +23,7 @@ type Props = CompositeScreenProps<
   BottomTabScreenProps<TabParamList, "Home">,
   StackScreenProps<RootStackParamList>
 >;
-
+const width = Dimensions.get("window").width;
 export const HomeScreen: FC<Props> = ({ navigation }) => {
   const toNavigate = (id: number) => {
     navigation.navigate("Details", { id: id });
@@ -57,6 +66,12 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
           />
         </View>
       </View>
+      <View style={styles.searchArea}>
+        <TextInput style={styles.input} placeholder="Search" />
+        <Pressable style={styles.searchButton}>
+          <Text>Search</Text>
+        </Pressable>
+      </View>
 
       <View style={styles.productContainer}>
         <FlatList
@@ -96,4 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 15,
   },
+  searchArea: { flexDirection: "row", padding: 10 },
+  input: { width: width * 0.7 },
+  searchButton: {},
 });

@@ -78,14 +78,6 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
           onChangeText={handleFilter}
         />
         {/* <Pressable style={styles.searchButton} > */}
-        <Pressable
-          style={({ pressed }) => [
-            styles.searchButton,
-            { opacity: pressed ? 0.6 : 1 },
-          ]}
-        >
-          <Text style={styles.searchText}>Search</Text>
-        </Pressable>
       </View>
 
       <View style={styles.productContainer}>

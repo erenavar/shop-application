@@ -8,7 +8,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { RootStackParamList, TabParamList } from "../../Navigation/types";
@@ -18,12 +18,14 @@ import CustomButton from "../../components/CustomButton";
 import { useQuery } from "@tanstack/react-query";
 import Indicator from "../../components/Indicator";
 import CardItem from "../../components/CardItem";
+import { IProduct } from "./types";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<TabParamList, "Home">,
   StackScreenProps<RootStackParamList>
 >;
 const width = Dimensions.get("window").width;
+
 export const HomeScreen: FC<Props> = ({ navigation }) => {
   const toNavigate = (id: number) => {
     navigation.navigate("Details", { id: id });
@@ -31,43 +33,50 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
   const { isLoading, error, data } = useQuery({
     queryKey: ["products"],
     queryFn: () =>
-      fetch("https://fakestoreapi.com/products").then((res) => res.json()),
+      fetch("https://fakestoreapi.com/products").then(
+        (res) => res.json() as Promise<IProduct[]>
+      ),
   });
+
+  const [filteredList, setFilteredList] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    if (data) {
+      setFilteredList(data);
+    }
+  }, [data]);
+
+  const handleFilter = (text: string) => {
+    if (data) {
+      const filtered = data.filter((product) =>
+        product.title.toLowerCase().includes(text.toLowerCase())
+      );
+      setFilteredList(filtered);
+    }
+  };
 
   if (isLoading) return <Indicator />;
   if (error) console.log("error :>> ", error);
-  const categoryFilter = (category: string) => alert(category);
+
   return (
     <SafeAreaView style={styles.container}>
       <GradientText text="Categories" style={styles.gradientText} />
       <View style={styles.buttonContainer1}>
         <View>
-          <CustomButton
-            title="Men's Clothing"
-            type="facebook"
-            filter={() => categoryFilter("men's clothing")}
-          />
-          <CustomButton
-            title="Jewelery"
-            type="secondary"
-            filter={() => categoryFilter("jewellery")}
-          />
+          <CustomButton title="Men's Clothing" type="facebook" />
+          <CustomButton title="Jewelery" type="secondary" />
         </View>
         <View>
-          <CustomButton
-            title="Electronic"
-            type="primary"
-            filter={() => categoryFilter("electronics")}
-          />
-          <CustomButton
-            title="Women's Clothing"
-            type="anchor"
-            filter={() => categoryFilter("women's clothing")}
-          />
+          <CustomButton title="Electronic" type="primary" />
+          <CustomButton title="Women's Clothing" type="anchor" />
         </View>
       </View>
       <View style={styles.searchArea}>
-        <TextInput style={styles.input} placeholder="Search" />
+        <TextInput
+          style={styles.input}
+          placeholder="Search"
+          onChangeText={handleFilter}
+        />
         {/* <Pressable style={styles.searchButton} > */}
         <Pressable
           style={({ pressed }) => [
@@ -82,7 +91,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
       <View style={styles.productContainer}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={data}
+          data={filteredList}
           renderItem={({ item }) => (
             <CardItem
               title={item.title}

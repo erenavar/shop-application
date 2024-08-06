@@ -41,15 +41,21 @@ function MainNavigation() {
             headerTitleStyle: { color: "white", fontSize: 25 },
           }}
         />
-             <Stack.Screen
+        <Stack.Screen
           name="Categorise"
           component={CategoriseScreen}
-          options={{ headerShown: false }}
+          options={({ route }) => ({ title: route.params.categoryName })}
         />
+        {/* <Stack.Screen
+          name="Categorise"
+          component={CategoriseScreen}
+          options={({ route }) => ({ title: route.params.categoryName })}
+        /> */}
+
         <Stack.Screen
           name="TabNavigation"
           component={TabNavigation}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, headerTitle: "Home Page" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

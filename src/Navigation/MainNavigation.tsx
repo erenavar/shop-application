@@ -1,11 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
-import LoginScreen from "../screens/LoginScreen/LoginScreen";
+import LoginScreen from "../screens/Login/LoginScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignUpScreen from "../screens/SignUpScreen/SignUpScreen";
+import SignUpScreen from "../screens/SignUp/SignUpScreen";
 import { RootStackParamList } from "./types";
 import { TabNavigation } from "./TabNavigation";
 import DetailsScreen from "../screens/Details/DetailsScreen";
 import { LinearGradient } from "expo-linear-gradient";
+import CategoriseScreen from "../screens/Categorise/CategoriseScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -39,6 +40,11 @@ function MainNavigation() {
             headerTintColor: "#b615af",
             headerTitleStyle: { color: "white", fontSize: 25 },
           }}
+        />
+             <Stack.Screen
+          name="Categorise"
+          component={CategoriseScreen}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="TabNavigation"

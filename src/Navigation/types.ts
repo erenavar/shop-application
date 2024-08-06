@@ -7,6 +7,9 @@ export type RootStackParamList = {
     Details: {
       id:number
     }
+    Categorise: {
+      categoryName: string
+    }
   };
 
   export type TabParamList = {

@@ -4,7 +4,7 @@ import { ThemedButton } from "react-native-really-awesome-button";
 interface IProps extends PressableProps {
   title: string;
   type: any;
-  filter?: () => void;
+  categorise?: () => void;
 }
 
 const CustomButton = (props: IProps) => {
@@ -14,7 +14,7 @@ const CustomButton = (props: IProps) => {
         name="rick"
         type={props.type}
         width={150}
-        onPress={props.filter}
+        onPress={props.categorise}
       >
         {props.title}
       </ThemedButton>

@@ -63,12 +63,28 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
       <GradientText text="Categories" style={styles.gradientText} />
       <View style={styles.buttonContainer1}>
         <View>
-          <CustomButton title="Men's Clothing" type="facebook" />
-          <CustomButton title="Jewelery" type="secondary" />
+          <CustomButton
+            title="Men's Clothing"
+            type="facebook"
+            categorise={() => alert("test")}
+          />
+          <CustomButton
+            title="Jewelery"
+            type="secondary"
+            categorise={() => alert("test")}
+          />
         </View>
         <View>
-          <CustomButton title="Electronic" type="primary" />
-          <CustomButton title="Women's Clothing" type="anchor" />
+          <CustomButton
+            title="Electronic"
+            type="primary"
+            categorise={() => alert("test")}
+          />
+          <CustomButton
+            title="Women's Clothing"
+            type="anchor"
+            categorise={() => alert("test")}
+          />
         </View>
       </View>
       <View style={styles.searchArea}>

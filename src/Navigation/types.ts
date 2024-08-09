@@ -9,6 +9,7 @@ export type RootStackParamList = {
     }
     Categorise: {
       categoryName: string
+      navigateName: string
     }
   };
 

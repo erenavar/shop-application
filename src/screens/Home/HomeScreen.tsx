@@ -55,8 +55,8 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
     }
   };
 
-  const categorise = (categoryName: string) => {
-    navigation.navigate("Categorise", { categoryName });
+  const categorise = (categoryName: string, navigateName: string) => {
+    navigation.navigate("Categorise", { categoryName, navigateName });
   };
 
   if (isLoading) return <Indicator />;
@@ -70,24 +70,26 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
           <CustomButton
             title="Men's Clothing"
             type="facebook"
-            categorise={() => categorise("Men's Clothing")}
+            categorise={() => categorise("Men's Clothing", "men's clothing")}
           />
           <CustomButton
             title="Jewelery"
             type="secondary"
-            categorise={() => categorise("Jewelery")}
+            categorise={() => categorise("Jewelery", "jewellery")}
           />
         </View>
         <View>
           <CustomButton
             title="Electronic"
             type="primary"
-            categorise={() => categorise("Electronic")}
+            categorise={() => categorise("Electronic", "electronic")}
           />
           <CustomButton
             title="Women's Clothing"
             type="anchor"
-            categorise={() => categorise("Women's Clothing")}
+            categorise={() =>
+              categorise("Women's Clothing", "women's clothing")
+            }
           />
         </View>
       </View>

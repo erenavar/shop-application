@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React, { FC } from "react";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { RootStackParamList, TabParamList } from "../../Navigation/types";
@@ -6,6 +6,7 @@ import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { StackScreenProps } from "@react-navigation/stack";
 import { useQuery } from "@tanstack/react-query";
 import CardItem from "../../components/CardItem";
+import GradientText from "../../components/GradientText";
 
 type Props = CompositeScreenProps<
   StackScreenProps<RootStackParamList, "Categorise">,
@@ -24,7 +25,8 @@ const CategoriseScreen: FC<Props> = ({ route }) => {
   });
 
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
+      <GradientText style={styles.title} text={route.params.categoryName} />
       <FlatList
         showsVerticalScrollIndicator={false}
         data={data}
@@ -38,10 +40,16 @@ const CategoriseScreen: FC<Props> = ({ route }) => {
         )}
         keyExtractor={(item) => item.id}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default CategoriseScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginHorizontal: "5%",
+  },
+  title: { fontSize: 40, alignSelf: "center" },
+});

@@ -75,14 +75,14 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
           <CustomButton
             title="Jewelery"
             type="secondary"
-            categorise={() => categorise("Jewelery", "jewellery")}
+            categorise={() => categorise("Jewelery", "jewelery")}
           />
         </View>
         <View>
           <CustomButton
             title="Electronic"
             type="primary"
-            categorise={() => categorise("Electronic", "electronic")}
+            categorise={() => categorise("Electronic", "electronics")}
           />
           <CustomButton
             title="Women's Clothing"

@@ -113,7 +113,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
               toNavigate={() => toNavigate(item.id)}
             />
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
         />
       </View>
     </SafeAreaView>

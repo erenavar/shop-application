@@ -1,7 +1,7 @@
 export interface IProps {
     title: string;
     price: number;
-    toNavigate : () => void,
+    toNavigate? : () => void,
     image:string,
     rating: {
       rate: number;

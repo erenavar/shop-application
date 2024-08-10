@@ -9,24 +9,22 @@ import {
   View,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { ISignup } from "./types";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { RootStackParamList } from "../../Navigation/types";
+import { Formik } from "formik";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Signup">;
 
 const SignUpScreen: FC<Props> = ({ navigation }) => {
   const back = () => navigation.goBack();
-  const [state, setState] = useState<ISignup>({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
 
   const signup = async () => {
-    if (state.password === state.confirmPassword) {
-      createUserWithEmailAndPassword(auth, state.email, state.password)
+    if (password === confirmPassword) {
+      createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
           navigation.navigate("TabNavigation");
@@ -48,41 +46,51 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
     >
       <View style={styles.container}>
         <Text style={styles.text}>Sign Up</Text>
-        <TextInput
-          autoCapitalize="none"
-          style={styles.input}
-          placeholder="E-mail"
-          placeholderTextColor="#999"
-          onChangeText={(text) =>
-            setState((prevState) => ({ ...prevState, email: text }))
-          }
-        />
-        <TextInput
-          secureTextEntry
-          autoCapitalize="none"
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor="#999"
-          onChangeText={(text) =>
-            setState((prevState) => ({ ...prevState, password: text }))
-          }
-        />
-        <TextInput
-          secureTextEntry
-          autoCapitalize="none"
-          style={styles.input}
-          placeholder="Confirm Password"
-          placeholderTextColor="#999"
-          onChangeText={(text) =>
-            setState((prevState) => ({ ...prevState, confirmPassword: text }))
-          }
-        />
-        <Pressable
-          style={[styles.button, { backgroundColor: "lightblue" }]}
-          onPress={signup}
+        <Formik
+          initialValues={{
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
         >
-          <Text style={styles.buttonText}>Signup</Text>
-        </Pressable>
+          {({ handleSubmit, handleChange, values }) => (
+            <>
+              <TextInput
+                value={values.email}
+                autoCapitalize="none"
+                style={styles.input}
+                placeholder="E-mail"
+                placeholderTextColor="#999"
+                onChangeText={handleChange("email")}
+              />
+              <TextInput
+                secureTextEntry
+                value={values.password}
+                autoCapitalize="none"
+                style={styles.input}
+                placeholder="Password"
+                placeholderTextColor="#999"
+                onChangeText={handleChange("password")}
+              />
+              <TextInput
+                secureTextEntry
+                value={values.confirmPassword}
+                autoCapitalize="none"
+                style={styles.input}
+                placeholder="Confirm Password"
+                placeholderTextColor="#999"
+                onChangeText={handleChange("confirmPassword")}
+              />
+              <Pressable
+                style={[styles.button, { backgroundColor: "lightblue" }]}
+                onPress={() => handleSubmit()}
+              >
+                <Text style={styles.buttonText}>Signup</Text>
+              </Pressable>
+            </>
+          )}
+        </Formik>
+
         <Pressable style={styles.back} onPress={back}>
           <Ionicons name="arrow-back" size={24} color="gray" />
           <Text>Back to Login Page</Text>

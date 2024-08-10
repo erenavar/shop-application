@@ -22,21 +22,16 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
   // const [password, setPassword] = useState("");
   // const [confirmPassword, setConfirmPassword] = useState("");
 
-  const signup = async () => {
-    if (password === confirmPassword) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          navigation.navigate("TabNavigation");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ..
-        });
-    } else {
-      alert("Confirm Your Password");
-    }
+  const signup = async (values: any) => {
+    createUserWithEmailAndPassword(auth, values.email, values.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        navigation.navigate("TabNavigation");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   return (
@@ -47,6 +42,7 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={styles.text}>Sign Up</Text>
         <Formik
+          onSubmit={(values) => signup(values)}
           initialValues={{
             email: "",
             password: "",

@@ -21,7 +21,9 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
   const back = () => navigation.goBack();
 
   const signup = async (values: ISignup) => {
-    createUserWithEmailAndPassword(auth, values.email, values.password)
+    if(values.password === values.password){
+
+      createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
         const user = userCredential.user;
         navigation.navigate("TabNavigation");
@@ -30,6 +32,9 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
+    } else {
+      alert("Please, Confirm Your Password")
+    }
   };
 
   return (

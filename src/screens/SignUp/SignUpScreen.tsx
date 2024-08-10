@@ -13,21 +13,8 @@ import { ISignup } from "./types";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { RootStackParamList } from "../../Navigation/types";
-import * as Yup from "yup";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Signup">;
-
-const signUpSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Email is Invalid")
-    .required("Email Cannot be Empty"),
-  password: Yup.string()
-    .min(5, "Password must be 5 characters")
-    .required("Password Cannot be Empty"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Password must match")
-    .required("Please Enter Password Again"),
-});
 
 const SignUpScreen: FC<Props> = ({ navigation }) => {
   const back = () => navigation.goBack();

@@ -13,16 +13,14 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { RootStackParamList } from "../../Navigation/types";
 import { Formik } from "formik";
+import { ISignup } from "./types";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Signup">;
 
 const SignUpScreen: FC<Props> = ({ navigation }) => {
   const back = () => navigation.goBack();
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
 
-  const signup = async (values: any) => {
+  const signup = async (values: ISignup) => {
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
         const user = userCredential.user;

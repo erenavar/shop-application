@@ -46,7 +46,10 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
         <Text style={styles.text}>Sign Up</Text>
         <Formik
           validationSchema={validation}
-          onSubmit={(values) => signup(values)}
+          onSubmit={(values, { resetForm }) => {
+            signup(values);
+            resetForm();
+          }}
           initialValues={{
             email: "",
             password: "",

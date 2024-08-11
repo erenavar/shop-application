@@ -14,6 +14,7 @@ import { auth } from "../../../firebaseConfig";
 import { RootStackParamList } from "../../Navigation/types";
 import { Formik } from "formik";
 import { ISignup } from "./types";
+import * as Yup from "yup";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Signup">;
 
@@ -21,19 +22,18 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
   const back = () => navigation.goBack();
 
   const signup = async (values: ISignup) => {
-    if(values.password === values.password){
-
+    if (values.password === values.password) {
       createUserWithEmailAndPassword(auth, values.email, values.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        navigation.navigate("TabNavigation");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
+        .then((userCredential) => {
+          const user = userCredential.user;
+          navigation.navigate("TabNavigation");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
     } else {
-      alert("Please, Confirm Your Password")
+      alert("Please, Confirm Your Password");
     }
   };
 
@@ -45,6 +45,7 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={styles.text}>Sign Up</Text>
         <Formik
+          validationSchema={validation}
           onSubmit={(values) => signup(values)}
           initialValues={{
             email: "",
@@ -89,7 +90,6 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
             </>
           )}
         </Formik>
-
         <Pressable style={styles.back} onPress={back}>
           <Ionicons name="arrow-back" size={24} color="gray" />
           <Text>Back to Login Page</Text>
@@ -100,6 +100,17 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
 };
 
 export default SignUpScreen;
+
+const validation = Yup.object().shape({
+  email: Yup.string()
+    .email("Please,control your email adress")
+    .required("Email is required"),
+  password: Yup.string().required("Password is required"),
+  confirmPassword: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Passwords must match"
+  ),
+});
 
 const styles = StyleSheet.create({
   background: {

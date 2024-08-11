@@ -53,7 +53,14 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
             confirmPassword: "",
           }}
         >
-          {({ handleSubmit, handleChange, values, errors }) => (
+          {({
+            handleSubmit,
+            handleChange,
+            touched,
+            handleBlur,
+            values,
+            errors,
+          }) => (
             <>
               <TextInput
                 value={values.email}
@@ -61,9 +68,12 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
                 style={styles.input}
                 placeholder="E-mail"
                 placeholderTextColor="#999"
+                onTouchStart={handleBlur("email")}
                 onChangeText={handleChange("email")}
               />
-              {errors.password && <Error message={errors.email} />}
+              {touched.email && errors.password && (
+                <Error message={errors.email} />
+              )}
               <TextInput
                 secureTextEntry
                 value={values.password}
@@ -71,9 +81,12 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
                 style={styles.input}
                 placeholder="Password"
                 placeholderTextColor="#999"
+                onTouchStart={handleBlur("password")}
                 onChangeText={handleChange("password")}
               />
-              {errors.email && <Error message={errors.password} />}
+              {touched.password && errors.email && (
+                <Error message={errors.password} />
+              )}
               <TextInput
                 secureTextEntry
                 value={values.confirmPassword}
@@ -81,9 +94,10 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
                 style={styles.input}
                 placeholder="Confirm Password"
                 placeholderTextColor="#999"
+                onTouchStart={handleBlur("confirmPassword")}
                 onChangeText={handleChange("confirmPassword")}
               />
-              {errors.confirmPassword && (
+              {touched.confirmPassword && errors.confirmPassword && (
                 <Error message={errors.confirmPassword} />
               )}
               <Pressable

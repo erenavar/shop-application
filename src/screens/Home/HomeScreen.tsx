@@ -59,6 +59,10 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
     navigation.navigate("Categorise", { categoryName, navigateName });
   };
 
+  const addFavourites = () => {
+    console.log("object :>> ", "test to favourites");
+  };
+
   if (isLoading) return <Indicator />;
   if (error) console.log("error :>> ", error);
 
@@ -113,6 +117,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
               rating={item.rating}
               image={item.image}
               toNavigate={() => toNavigate(item.id)}
+              toFav={() => addFavourites()}
             />
           )}
           keyExtractor={(item) => item.id.toString()}

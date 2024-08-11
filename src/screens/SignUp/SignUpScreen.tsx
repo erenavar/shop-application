@@ -14,7 +14,7 @@ import { auth } from "../../../firebaseConfig";
 import { RootStackParamList } from "../../Navigation/types";
 import { Formik } from "formik";
 import { ISignup } from "./types";
-import * as Yup from "yup";
+import { validation } from "./yup";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Signup">;
 
@@ -53,7 +53,7 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
             confirmPassword: "",
           }}
         >
-          {({ handleSubmit, handleChange, values }) => (
+          {({ handleSubmit, handleChange, values, errors }) => (
             <>
               <TextInput
                 value={values.email}
@@ -63,6 +63,7 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
                 placeholderTextColor="#999"
                 onChangeText={handleChange("email")}
               />
+              {errors.password && <Error message={errors.email} />}
               <TextInput
                 secureTextEntry
                 value={values.password}
@@ -72,6 +73,7 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
                 placeholderTextColor="#999"
                 onChangeText={handleChange("password")}
               />
+              {errors.email && <Error message={errors.password} />}
               <TextInput
                 secureTextEntry
                 value={values.confirmPassword}
@@ -81,6 +83,9 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
                 placeholderTextColor="#999"
                 onChangeText={handleChange("confirmPassword")}
               />
+              {errors.confirmPassword && (
+                <Error message={errors.confirmPassword} />
+              )}
               <Pressable
                 style={[styles.button, { backgroundColor: "lightblue" }]}
                 onPress={() => handleSubmit()}
@@ -101,18 +106,14 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
 
 export default SignUpScreen;
 
-const validation = Yup.object().shape({
-  email: Yup.string()
-    .email("Please,control your email adress")
-    .required("Email is required"),
-  password: Yup.string().required("Password is required"),
-  confirmPassword: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match"
-  ),
-});
+const Error = ({ message }) => <Text style={styles.error}>{message}</Text>;
 
 const styles = StyleSheet.create({
+  error: {
+    fontWeight: "bold",
+    color: "red",
+    fontSize: 13,
+  },
   background: {
     flex: 1,
     width: "100%",

@@ -3,7 +3,7 @@ import { NavigatorScreenParams } from "@react-navigation/native";
 export type RootStackParamList = {
     Login: undefined;
     Signup: undefined;
-    TabNavigation: NavigatorScreenParams<TabParamList> | undefined
+    Introduction: undefined,
     Details: {
       id:number
     }
@@ -11,6 +11,7 @@ export type RootStackParamList = {
       categoryName: string
       navigateName: string
     }
+    TabNavigation: NavigatorScreenParams<TabParamList> | undefined
   };
 
   export type TabParamList = {

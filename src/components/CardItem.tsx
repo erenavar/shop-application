@@ -25,7 +25,7 @@ const CardItem = (props: IProps) => {
             <FontAwesome name="thumbs-o-up" size={16} color="black" />
             <Text>{props.rating.rate}/5</Text>
           </View>
-          <Pressable onPress={props.tofav}>
+          <Pressable onPress={props.toFav}>
             <FontAwesome name="heart-o" size={18} color="black" />
             {/* <FontAwesome name="heart" size={24} color="black" /> */}
           </Pressable>

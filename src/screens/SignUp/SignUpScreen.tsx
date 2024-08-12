@@ -123,7 +123,7 @@ const SignUpScreen: FC<Props> = ({ navigation }) => {
 
 export default SignUpScreen;
 
-const Error = ({ message }) => <Text style={styles.error}>{message}</Text>;
+const Error = ({ message }: any) => <Text style={styles.error}>{message}</Text>;
 
 const styles = StyleSheet.create({
   error: {

@@ -7,6 +7,7 @@ import { TabNavigation } from "./TabNavigation";
 import DetailsScreen from "../screens/Details/DetailsScreen";
 import { LinearGradient } from "expo-linear-gradient";
 import CategoriseScreen from "../screens/Categorise/CategoriseScreen";
+import IntroductionScreen from "../screens/Introduction/IntroductionScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -22,6 +23,11 @@ function MainNavigation() {
         <Stack.Screen
           name="Signup"
           component={SignUpScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Introduction"
+          component={IntroductionScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -46,12 +52,6 @@ function MainNavigation() {
           component={CategoriseScreen}
           options={({ route }) => ({ title: route.params.categoryName })}
         />
-        {/* <Stack.Screen
-          name="Categorise"
-          component={CategoriseScreen}
-          options={({ route }) => ({ title: route.params.categoryName })}
-        /> */}
-
         <Stack.Screen
           name="TabNavigation"
           component={TabNavigation}

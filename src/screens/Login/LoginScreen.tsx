@@ -11,6 +11,7 @@ import {
 import { ILogin } from "./types";
 import { RootStackParamList } from "../../Navigation/types";
 
+
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
 const LoginScreen: FC<Props> = ({ navigation }) => {
@@ -26,7 +27,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
   const toSignup = () => {
     navigation.navigate("Signup");
   };
-  console.log("state :>> ", state);
+
   return (
     <ImageBackground
       style={styles.background}

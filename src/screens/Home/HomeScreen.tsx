@@ -19,6 +19,7 @@ import { useQuery } from "@tanstack/react-query";
 import Indicator from "../../components/Indicator";
 import CardItem from "../../components/CardItem";
 import { IProduct } from "./types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<TabParamList, "Home">,
@@ -59,8 +60,9 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
     navigation.navigate("Categorise", { categoryName, navigateName });
   };
 
-  const addFavourites = () => {
-    console.log("object :>> ", "test to favourites");
+  const addFavourites = async (key: string, name: string) => {
+    alert("test");
+    // await AsyncStorage.setItem(key, name);
   };
 
   if (isLoading) return <Indicator />;
@@ -103,7 +105,6 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
           placeholder="Search"
           onChangeText={handleFilter}
         />
-        {/* <Pressable style={styles.searchButton} > */}
       </View>
 
       <View style={styles.productContainer}>
@@ -117,7 +118,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
               rating={item.rating}
               image={item.image}
               toNavigate={() => toNavigate(item.id)}
-              toFav={() => addFavourites()}
+              toFav={() => addFavourites(item.id.toString(), item.title)}
             />
           )}
           keyExtractor={(item) => item.id.toString()}

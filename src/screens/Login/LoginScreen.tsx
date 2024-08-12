@@ -10,18 +10,28 @@ import {
 } from "react-native";
 import { ILogin } from "./types";
 import { RootStackParamList } from "../../Navigation/types";
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
 const LoginScreen: FC<Props> = ({ navigation }) => {
+  const auth = getAuth();
   const [state, setState] = useState<ILogin>({
     email: "",
     password: "",
   });
 
   const login = () => {
-    navigation.navigate("TabNavigation");
+    signInWithEmailAndPassword(auth, state.email, state.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        navigation.navigate("TabNavigation");
+      })
+      .catch((error) => {
+        alert("test");
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   const toSignup = () => {

@@ -3,15 +3,17 @@ import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-let isLogin = true;
+let isLogin = false;
 
 const IntroductionScreen = () => {
   const navigation = useNavigation();
-  // useEffect(() => {
-  //   if (isLogin) {
-  //     navigation.navigate("TabParamList", { screen: "Home" });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (isLogin) {
+      navigation.navigate("TabParamList", { screen: "Home" });
+    } else {
+      navigation.navigate("Login");
+    }
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>

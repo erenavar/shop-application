@@ -17,7 +17,7 @@ const IntroductionScreen = () => {
     try {
       const value = await AsyncStorage.getItem("isLogin");
 
-      if (value) {
+      if (value === "true") {
         navigation.navigate("TabNavigation", { screen: "Home" });
       } else {
         navigation.navigate("Login");

@@ -7,13 +7,14 @@ import { TabNavigation } from "./TabNavigation";
 import DetailsScreen from "../screens/Details/DetailsScreen";
 import { LinearGradient } from "expo-linear-gradient";
 import CategoriseScreen from "../screens/Categorise/CategoriseScreen";
+import IntroductionScreen from "../screens/Introduction/IntroductionScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function MainNavigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Introduction">
         <Stack.Screen
           name="Login"
           component={LoginScreen}
@@ -22,6 +23,11 @@ function MainNavigation() {
         <Stack.Screen
           name="Signup"
           component={SignUpScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Introduction"
+          component={IntroductionScreen}
           options={{ headerShown: false }}
         />
 

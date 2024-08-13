@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export let isLogin = {
   value: false,
@@ -9,12 +10,20 @@ export let isLogin = {
 const IntroductionScreen = () => {
   const navigation = useNavigation();
   useEffect(() => {
-    if (isLogin.value) {
-      navigation.navigate("TabParamList", { screen: "Home" });
-    } else {
-      navigation.navigate("Login");
-    }
+    getLoginDetail();
   }, []);
+
+  const getLoginDetail = async () => {
+    try {
+      const value = await AsyncStorage.getItem("isLogin");
+
+      if (value) {
+        navigation.navigate("TabNavigation", { screen: "Home" });
+      } else {
+        navigation.navigate("Login");
+      }
+    } catch (error) {}
+  };
 
   return (
     <View style={{ flex: 1 }}>

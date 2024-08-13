@@ -2,9 +2,10 @@ import { Button, StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 const ProfileScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   useEffect(() => {
     AsyncStorage.getItem("isLogin").then((value: string | null) => {
       console.log("value :>> ", value);

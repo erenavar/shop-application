@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-let isLogin = false;
+export let isLogin = {
+  value: false,
+};
 
 const IntroductionScreen = () => {
   const navigation = useNavigation();
   useEffect(() => {
-    if (isLogin) {
+    if (isLogin.value) {
       navigation.navigate("TabParamList", { screen: "Home" });
     } else {
       navigation.navigate("Login");

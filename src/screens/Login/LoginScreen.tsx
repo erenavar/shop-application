@@ -11,6 +11,8 @@ import {
 import { ILogin } from "./types";
 import { RootStackParamList } from "../../Navigation/types";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { isLogin } from "../Introduction/IntroductionScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
@@ -25,7 +27,8 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
     signInWithEmailAndPassword(auth, state.email, state.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        navigation.navigate("TabNavigation");
+        AsyncStorage.setItem("isLogin", "true");
+        navigation.navigate("TabNavigation", { screen: "Home" });
       })
       .catch((error) => {
         alert("test");

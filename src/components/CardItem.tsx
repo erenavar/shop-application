@@ -1,9 +1,10 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { IProps } from "./types";
 
 const CardItem = (props: IProps) => {
+  const [isFav, setIsFav] = useState(false);
   return (
     <Pressable style={styles.container} onPress={props.toNavigate}>
       <Image
@@ -25,9 +26,12 @@ const CardItem = (props: IProps) => {
             <FontAwesome name="thumbs-o-up" size={16} color="black" />
             <Text>{props.rating.rate}/5</Text>
           </View>
-          <Pressable onPress={props.toFav}>
-            <FontAwesome name="heart-o" size={18} color="black" />
-            {/* <FontAwesome name="heart" size={24} color="black" /> */}
+          <Pressable onPress={() => setIsFav(!isFav)}>
+            {isFav ? (
+              <FontAwesome name="heart" size={18} color="red" />
+            ) : (
+              <FontAwesome name="heart-o" size={18} color="black" />
+            )}
           </Pressable>
         </View>
       </View>

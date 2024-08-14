@@ -19,7 +19,6 @@ import { useQuery } from "@tanstack/react-query";
 import Indicator from "../../components/Indicator";
 import CardItem from "../../components/CardItem";
 import { IProduct } from "./types";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<TabParamList, "Home">,
@@ -28,6 +27,7 @@ type Props = CompositeScreenProps<
 const width = Dimensions.get("window").width;
 
 export const HomeScreen: FC<Props> = ({ navigation }) => {
+  const [filteredList, setFilteredList] = useState<IProduct[]>([]);
   const toNavigate = (id: number) => {
     navigation.navigate("Details", { id: id });
   };
@@ -38,15 +38,11 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
         (res) => res.json() as Promise<IProduct[]>
       ),
   });
-
-  const [filteredList, setFilteredList] = useState<IProduct[]>([]);
-
   useEffect(() => {
     if (data) {
       setFilteredList(data);
     }
   }, [data]);
-
   const handleFilter = (text: string) => {
     if (data) {
       const filtered = data.filter((product) =>
@@ -58,11 +54,6 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
 
   const categorise = (categoryName: string, navigateName: string) => {
     navigation.navigate("Categorise", { categoryName, navigateName });
-  };
-
-  const addFavourites = async (key: string, name: string) => {
-    alert("test");
-    // await AsyncStorage.setItem(key, name);
   };
 
   if (isLoading) return <Indicator />;
@@ -118,7 +109,6 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
               rating={item.rating}
               image={item.image}
               toNavigate={() => toNavigate(item.id)}
-              toFav={() => addFavourites(item.id.toString(), item.title)}
             />
           )}
           keyExtractor={(item) => item.id.toString()}

@@ -5,10 +5,12 @@ import ProfileScreen from "../screens/Profile/ProfileScreen";
 import FavouritesScreen from "../screens/Favourites/FavouritesScreen";
 import CartScreen from "../screens/Cart/CartScreen";
 import { Ionicons } from "@expo/vector-icons";
+import useCart from "../hooks/useCart";
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export function TabNavigation() {
+  const { cartArray } = useCart();
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -46,6 +48,7 @@ export function TabNavigation() {
           tabBarIcon: () => (
             <Ionicons name="cart-outline" size={27} color="black" />
           ),
+          tabBarBadge: cartArray?.length
         }}
       />
     </Tab.Navigator>

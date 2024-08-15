@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 
 const useFavourite = () => {
   const [favArray, setFavArray] = useState<string[]>([]);
@@ -25,6 +26,21 @@ const useFavourite = () => {
 
   const removeFavourite = async (item: string) => {
     try {
+      Alert.alert(
+        'Alert Title',
+        'My Alert Msg',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+          },
+          {
+            text: 'OK', 
+            onPress: () => console.log('OK Pressed')
+          },
+        ],
+        {cancelable: false},
+      );
       const newFavArray = favArray.filter((fav) => fav !== item);
       setFavArray(newFavArray);
       await AsyncStorage.setItem("favorites", JSON.stringify(newFavArray));

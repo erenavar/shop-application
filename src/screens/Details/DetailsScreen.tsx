@@ -18,13 +18,16 @@ import GradientText from "../../components/GradientText";
 import { useQuery } from "@tanstack/react-query";
 import Indicator from "../../components/Indicator";
 import { IProduct } from "../Home/types";
+import useCart from "../../hooks/useCart";
 
 type Props = CompositeScreenProps<
   StackScreenProps<RootStackParamList, "Details">,
   BottomTabScreenProps<TabParamList>
 >;
 const width = Dimensions.get("window").width;
+
 const DetailsScreen: FC<Props> = ({ route }) => {
+  const { addCart } = useCart();
   const { data, error, isLoading } = useQuery({
     queryKey: ["ProductDetails"],
     queryFn: () =>
@@ -68,7 +71,7 @@ const DetailsScreen: FC<Props> = ({ route }) => {
           <FontAwesome name="heart-o" size={24} color="rebeccapurple" />
           {/* <FontAwesome name="heart" size={24} color="black" /> */}
         </Pressable>
-        <Pressable style={styles.button}>
+        <Pressable style={styles.button} onPress={() => addCart(data)}>
           <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
             ADD TO CART
           </Text>

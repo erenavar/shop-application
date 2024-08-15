@@ -1,14 +1,9 @@
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
-interface ICart {
-    title:string,
-    price: number
-}
+import { IProduct } from "../screens/Home/types";
 
 const useCart = () => {
-  const [cartArray, setCartArray] = useState<ICart[]>();
+  const [cartArray, setCartArray] = useState<IProduct[]>();
 
   const getCartItems = async () => {
     try {
@@ -19,7 +14,7 @@ const useCart = () => {
     }
   };
 
-  const addCart = async (item: ICart) => {
+  const addCart = async (item:IProduct) => {
     try {
       const newCartArray = [...cartArray, item];
       setCartArray(newCartArray);
@@ -29,7 +24,7 @@ const useCart = () => {
     }
   };
 
-  const removeCart = async (item: ICart) => {
+  const removeCart = async (item: IProduct) => {
     try {
       const newCartArray = cartArray.filter((cartItem) => cartItem !== item);
       setCartArray(newCartArray);
@@ -53,6 +48,8 @@ const useCart = () => {
     addCart,
     removeCart,
     deleteAllItems,
+    getCartItems,
+    cartArray
   };
 };
 

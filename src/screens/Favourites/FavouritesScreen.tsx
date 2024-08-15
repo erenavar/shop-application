@@ -1,7 +1,7 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import useFavourite from "../../hooks/useAsyncStorage";
+import useFavourite from "../../hooks/useFavorite";
 
 const Favourite = () => {
   const { favArray, deleteAllItems, getFavourites } = useFavourite();

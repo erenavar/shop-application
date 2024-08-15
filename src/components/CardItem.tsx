@@ -2,10 +2,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { IProps } from "./types";
-import AsyncStorage, {
-  useAsyncStorage,
-} from "@react-native-async-storage/async-storage";
-import useFavourite from "../hooks/useAsyncStorage";
+import useFavourite from "../hooks/useFavorite";
 
 const CardItem = (props: IProps) => {
   const { favArray, addFavourite, removeFavourite, getFavourites } =
@@ -19,28 +16,6 @@ const CardItem = (props: IProps) => {
       removeFavourite(item);
     }
   };
-  // const addFav = async (value: string) => {
-  //   if (!isFav) {
-  //     try {
-  //       setIsFav(!isFav);
-  //       const existingFavs = await AsyncStorage.getItem("favorites");
-  //       let favList = existingFavs ? JSON.parse(existingFavs) : [];
-
-  //       favList.push(value);
-
-  //       await AsyncStorage.setItem("favorites", JSON.stringify(favList));
-  //     } catch (error) {
-  //       console.error("Failed to save the product to favorites:", error);
-  //     }
-  //   } else {
-  //     setIsFav(!isFav);
-  //     const existingFavs = await AsyncStorage.getItem("favorites");
-  //     let favList = existingFavs ? JSON.parse(existingFavs) : [];
-
-  //     const removedList = favList.filter((item: string) => item !== value);
-  //     await AsyncStorage.setItem("favorites", JSON.stringify(removedList));
-  //   }
-  // };
 
   return (
     <Pressable style={styles.container} onPress={props.toNavigate}>

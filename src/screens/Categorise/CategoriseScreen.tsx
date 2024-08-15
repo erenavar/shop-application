@@ -14,7 +14,6 @@ type Props = CompositeScreenProps<
 >;
 
 const CategoriseScreen: FC<Props> = ({ route }) => {
-  console.log("params.categoryName :>> ", route.params.navigateName);
   const { data } = useQuery({
     queryKey: ["categorised"],
     queryFn: () =>

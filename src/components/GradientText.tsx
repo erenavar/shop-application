@@ -10,12 +10,7 @@ const GradientText = (props: Props) => {
   return (
     <MaskedView
       maskElement={
-        <Text
-          style={[
-            props.style,
-            { backgroundColor: "transparent", width: "50%" },
-          ]}
-        >
+        <Text style={[props.style, { backgroundColor: "transparent" }]}>
           {props.text}
         </Text>
       }

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextProps, View } from "react-native";
+import { Text, TextProps, View } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
@@ -10,7 +10,12 @@ const GradientText = (props: Props) => {
   return (
     <MaskedView
       maskElement={
-        <Text style={[props.style, { backgroundColor: "transparent" }]}>
+        <Text
+          style={[
+            props.style,
+            { backgroundColor: "transparent", width: "50%" },
+          ]}
+        >
           {props.text}
         </Text>
       }
@@ -28,5 +33,3 @@ const GradientText = (props: Props) => {
 };
 
 export default GradientText;
-
-const styles = StyleSheet.create({});

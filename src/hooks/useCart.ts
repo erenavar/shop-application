@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { IProduct } from "../screens/Home/types";
+import { useNavigation } from "@react-navigation/native";
+
 
 const useCart = () => {
-  const [cartArray, setCartArray] = useState<IProduct[]>();
+    const navigation = useNavigation();
+  const [cartArray, setCartArray] = useState<IProduct[]>([]);
 
   const getCartItems = async () => {
     try {
@@ -19,6 +22,8 @@ const useCart = () => {
       const newCartArray = [...cartArray, item];
       setCartArray(newCartArray);
       await AsyncStorage.setItem("cartItems", JSON.stringify(newCartArray));
+       alert("Product was added");
+       navigation.navigate("Home")
     } catch (e) {
       console.error("Error adding item to AsyncStorage", e);
     }

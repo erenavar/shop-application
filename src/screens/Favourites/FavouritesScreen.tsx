@@ -12,7 +12,7 @@ import GradientText from "../../components/GradientText";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 const Favourite = () => {
-  const { favArray, deleteAllItems, getFavourites } = useFavourite();
+  const { favArray, deleteAllItems, removeFavourite } = useFavourite();
 
   return (
     <View style={{ margin: 10, flex: 1 }}>
@@ -21,8 +21,8 @@ const Favourite = () => {
         {favArray.map((item) => (
           <View style={styles.itemContainer}>
             <Text style={styles.title}>{item}</Text>
-            <Pressable onPress={() => alert("test")}>
-              <AntDesign name="delete" size={20} color="black" />
+            <Pressable onPress={() => removeFavourite(item)}>
+              <AntDesign name="delete" size={20} color="red" />
             </Pressable>
           </View>
         ))}

@@ -27,8 +27,8 @@ const useFavourite = () => {
   const removeFavourite = async (item: string) => {
     try {
       Alert.alert(
-        'Alert Title',
-        'My Alert Msg',
+        'Delete',
+        'Item Will be Deleted',
         [
           {
             text: 'Cancel',
@@ -36,14 +36,15 @@ const useFavourite = () => {
           },
           {
             text: 'OK', 
-            onPress: () => console.log('OK Pressed')
+            onPress: () =>    {
+              const newFavArray = favArray.filter((fav) => fav !== item);
+              setFavArray(newFavArray);
+             AsyncStorage.setItem("favorites", JSON.stringify(newFavArray))}
           },
         ],
         {cancelable: false},
       );
-      const newFavArray = favArray.filter((fav) => fav !== item);
-      setFavArray(newFavArray);
-      await AsyncStorage.setItem("favorites", JSON.stringify(newFavArray));
+   
     } catch (e) {
       console.error("Error removing favourite from AsyncStorage", e);
     }

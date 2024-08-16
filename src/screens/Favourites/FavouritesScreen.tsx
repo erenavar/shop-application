@@ -1,8 +1,15 @@
-import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import useFavourite from "../../hooks/useFavorite";
 import GradientText from "../../components/GradientText";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 const Favourite = () => {
   const { favArray, deleteAllItems, getFavourites } = useFavourite();
@@ -14,7 +21,9 @@ const Favourite = () => {
         {favArray.map((item) => (
           <View style={styles.itemContainer}>
             <Text style={styles.title}>{item}</Text>
-            <Text style={styles.deleteButton}>Delete</Text>
+            <Pressable onPress={() => alert("test")}>
+              <AntDesign name="delete" size={20} color="black" />
+            </Pressable>
           </View>
         ))}
       </ScrollView>
@@ -38,6 +47,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
+
     borderBottomColor: "gray",
     borderBottomWidth: 1,
     flex: 1,

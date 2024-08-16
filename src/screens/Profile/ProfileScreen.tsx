@@ -1,9 +1,9 @@
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, updateEmail, updateProfile } from "firebase/auth";
 import { IData } from "./types";
 
 const ProfileScreen = () => {
@@ -12,15 +12,6 @@ const ProfileScreen = () => {
   const auth = getAuth();
   const user = auth.currentUser;
 
-  onAuthStateChanged(auth, (user) => {
-    if (user != null) {
-      console.log("user :>> ", user);
-      console.log("user.email :>> ", user.email);
-      const uid = user.uid;
-    } else {
-    }
-  });
-
   const logOut = async () => {
     try {
       await AsyncStorage.removeItem("isLogin");
@@ -28,6 +19,30 @@ const ProfileScreen = () => {
     } catch (error) {}
   };
 
+  const handleUpdate = () => {
+    const { displayName, email } = datas;
+
+    updateProfile(auth.currentUser, {
+      displayName: displayName,
+    })
+      .then(() => {
+        console.log("Updated displayName:", auth.currentUser.displayName);
+
+        return updateEmail(auth.currentUser, email);
+      })
+      .then(() => {
+        console.log("Email updated successfully:", auth.currentUser.email);
+      })
+      .catch((error) => {
+        console.error("An error occurred:", error);
+      });
+  };
+
+  useEffect(() => {
+    console.log("auth.displayName :>> ", auth.currentUser?.displayName);
+  }, [auth.currentUser?.displayName]);
+
+  console.log("auth.displayName :>> ", auth.displayName);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{user?.email}</Text>
@@ -35,7 +50,7 @@ const ProfileScreen = () => {
         <Text style={styles.label}>Email:</Text>
         <TextInput
           style={styles.input}
-          value={user?.email}
+          value={datas.email}
           onChangeText={(text) => {
             setDatas((prevState) => ({ ...prevState, email: text }));
           }}
@@ -45,23 +60,15 @@ const ProfileScreen = () => {
         <Text style={styles.label}>Display Name:</Text>
         <TextInput
           style={styles.input}
-          value={user?.displayName}
+          value={datas.displayName}
           onChangeText={(text) => {
             setDatas((prevState) => ({ ...prevState, displayName: text }));
           }}
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Button
-          style={styles.button}
-          title="Update"
-          onPress={() => logOut()}
-        ></Button>
-        <Button
-          style={styles.button}
-          title="Logout"
-          onPress={() => logOut()}
-        ></Button>
+        <Button title="Update" onPress={handleUpdate}></Button>
+        <Button title="Logout" onPress={logOut}></Button>
       </View>
     </View>
   );

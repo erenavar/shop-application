@@ -1,10 +1,11 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import React from "react";
 import useCart from "../../hooks/useCart";
 import GradientText from "../../components/GradientText";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 const CartScreen = () => {
-  const { getCartItems, cartArray } = useCart();
+  const { getCartItems, cartArray, removeCart } = useCart();
 
   return (
     <View style={styles.cartContainer}>
@@ -15,6 +16,9 @@ const CartScreen = () => {
             <View style={styles.itemContainer}>
               <Text style={styles.text}>{item.title}</Text>
               <Text style={styles.price}>${item.price}</Text>
+              <Pressable onPress={() => removeCart(item)}>
+                <AntDesign name="delete" size={18} color="red" />
+              </Pressable>
             </View>
           </>
         ))}
@@ -43,6 +47,6 @@ const styles = StyleSheet.create({
     borderBottomColor: "gray",
     borderBottomWidth: 1,
   },
-  text: { flex: 5, marginVertical: 10 },
-  price: { flex: 1, fontWeight: "bold" },
+  text: { flex: 4, marginVertical: 10 },
+  price: { flex: 1, fontWeight: "bold", marginRight: 5 },
 });

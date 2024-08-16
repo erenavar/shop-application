@@ -4,10 +4,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { IData } from "./types";
 
 const ProfileScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const [datas, setDatas] = useState({ email: "", displayName: "" });
+  const [datas, setDatas] = useState<IData>({ email: "", displayName: "" });
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -32,11 +33,23 @@ const ProfileScreen = () => {
       <Text style={styles.title}>{user?.email}</Text>
       <View style={styles.datas}>
         <Text style={styles.label}>Email:</Text>
-        <TextInput style={styles.input} value={user?.email} />
+        <TextInput
+          style={styles.input}
+          value={user?.email}
+          onChangeText={(text) => {
+            setDatas((prevState) => ({ ...prevState, email: text }));
+          }}
+        />
       </View>
       <View style={styles.datas}>
         <Text style={styles.label}>Display Name:</Text>
-        <TextInput style={styles.input} value={user?.displayName} />
+        <TextInput
+          style={styles.input}
+          value={user?.displayName}
+          onChangeText={(text) => {
+            setDatas((prevState) => ({ ...prevState, displayName: text }));
+          }}
+        />
       </View>
       <View style={styles.buttonContainer}>
         <Button

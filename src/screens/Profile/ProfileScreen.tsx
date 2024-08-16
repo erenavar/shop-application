@@ -1,16 +1,24 @@
-import { Button, StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const ProfileScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  useEffect(() => {
-    AsyncStorage.getItem("isLogin").then((value: string | null) => {
-      console.log("value :>> ", value);
-    });
-  }, []);
+  const [datas, setDatas] = useState({ email: "", displayName: "" });
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  onAuthStateChanged(auth, (user) => {
+    if (user != null) {
+      console.log("user :>> ", user);
+      console.log("user.email :>> ", user.email);
+      const uid = user.uid;
+    } else {
+    }
+  });
 
   const logOut = async () => {
     try {
@@ -20,12 +28,52 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View>
-      <Button title="Logout" onPress={() => logOut()}></Button>
+    <View style={styles.container}>
+      <Text style={styles.title}>{user?.email}</Text>
+      <View style={styles.datas}>
+        <Text style={styles.label}>Email:</Text>
+        <TextInput style={styles.input} value={user?.email} />
+      </View>
+      <View style={styles.datas}>
+        <Text style={styles.label}>Display Name:</Text>
+        <TextInput style={styles.input} value={user?.displayName} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.button}
+          title="Update"
+          onPress={() => logOut()}
+        ></Button>
+        <Button
+          style={styles.button}
+          title="Logout"
+          onPress={() => logOut()}
+        ></Button>
+      </View>
     </View>
   );
 };
 
 export default ProfileScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: { flex: 1, margin: 10 },
+  title: { fontSize: 30, marginBottom: 20 },
+  datas: { flexDirection: "row", marginBottom: 10, alignItems: "center" },
+  label: {
+    flex: 2,
+  },
+  input: {
+    flex: 5,
+    backgroundColor: "white",
+    padding: 5,
+    borderRadius: 5,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  button: {
+    color: "red",
+  },
+});
